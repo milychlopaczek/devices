@@ -64,6 +64,6 @@ class QuestionController extends AbstractController
     {
         $repository=$entityManager->getRepository(Devices::class);
         $result=$repository->findAll();
-        dd($result);
+        return $this->render('question/homepage.html.twig', [$result]);
     }
 }
