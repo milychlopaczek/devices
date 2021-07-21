@@ -7,8 +7,8 @@ services:
     volumes:
     - ./:/var/www
     depends_on:
-      - devicesdb
-  devicesdb:
+      - database
+  database:
     image: mysql:8
     container_name: symfony_mysql
     ports:
