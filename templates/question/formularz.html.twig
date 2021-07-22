@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="jumbotron-img jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Add a device!!<i class="fa fa-robot"></i></h1>
+    </div>
+</div>
+<form action={{path('insert')}} method="POST">
+                <div>
+                    <label for="Name" class="control-label">Device Name</label>
+                    <input type="text" name="name" id="pet-name" class="form-control" />
+                </div>
+                <div class=>
+                    <label for="CompanyName" class="control-label">Company Name</label>
+                    <input type="text" name="CompanyName" id="CompanyName" class="form-control" />
+                </div>
+                <div>
+                    <label for="expiryDate" class="control-label">Expiry Date</label>
+                    <input type="date" name="expiryDate" id="expiryDate" class="form-control" />
+                </div>
+                <div>
+                    <label for="Status" class="control-label">Status</label>
+                    <input type="text" name="Status" id="form-control"/ class="form-control"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-heart"></span> Add</button>
+            </form>
+{% endblock %}
+

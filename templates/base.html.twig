@@ -3,9 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {% block stylesheets %}
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan&display=swap">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
@@ -17,10 +19,9 @@
           </a>
           <button class="btn btn-dark">Sign up</button>
         </nav>
-
-        {% block body %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        {% block body %}{% endblock %}
     </body>
 </html>

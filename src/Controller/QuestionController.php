@@ -32,11 +32,10 @@ class QuestionController extends AbstractController{
         $result=$repository->findAll();
         $query =$entityManager->createQueryBuilder();
         $query
-            ->select('d.device_id', 'd.name', 'c.name', 'd.expiry_date', 'd.status')
-            ->from('Devices', 'd')
-            ->innerJoin('d', 'Companies', 'c', 'd.company_id=c.company_id');
+            ->select('u.device_id', 'u.name', 'p.name', 'u.expiry_date', 'u.status')
+            ->from('Devices', 'u')
+            ->innerJoin('u', 'Companies', 'p', 'u.company_id=p.company_id');
 
-        
         return $this->render('question/homepage.html.twig', ['Devices' => $result,]);
     }
 }

@@ -23,9 +23,9 @@ class Devices
     private $name;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $company_id;
+    private $companyName;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -62,14 +62,14 @@ class Devices
         return $this;
     }
 
-    public function getCompanyId(): ?int
+    public function getCompanyName(): ?int
     {
-        return $this->company_id;
+        return $this->companyName;
     }
 
-    public function setCompanyId(?int $company_id): self
+    public function setCompanyName(?int $companyName): self
     {
-        $this->company_id = $company_id;
+        $this->companyName = $companyName;
 
         return $this;
     }
