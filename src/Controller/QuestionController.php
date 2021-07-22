@@ -7,12 +7,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use App\Entity\Devices;
 use App\Entity\Companies;
+use ArrayAccess;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class QuestionController extends AbstractController
-{
+class QuestionController extends AbstractController{
     private $logger;
     private $isDebug;
 
@@ -22,48 +22,21 @@ class QuestionController extends AbstractController
         $this->isDebug = $isDebug;
     }
 
-
-    /**
-     * @Route("/", name="app_homepage")
-     */
-    public function homepage()
-    {
-        return $this->render('question/homepage.html.twig');
-    }
-
-    /**
-     * @Route("/questions/{slug}", name="app_question_show")
-     */
-    public function show($slug, MarkdownHelper $markdownHelper)
-    {
-        if ($this->isDebug) {
-            $this->logger->info('We are in debug mode!');
-        }
-
-        $answers = [
-            'Make sure your cat is sitting `purrrfectly` still 🤣',
-            'Honestly, I like furry shoes better than MY cat',
-            'Maybe... try saying the spell backwards?',
-        ];
-        $questionText = 'I\'ve been turned into a cat, any *thoughts* on how to turn back? While I\'m **adorable**, I don\'t really care for cat food.';
-
-        $parsedQuestionText = $markdownHelper->parse($questionText);
-
-        return $this->render('question/show.html.twig', [
-            'question' => ucwords(str_replace('-', ' ', $slug)),
-            'questionText' => $parsedQuestionText,
-            'answers' => $answers,
-        ]);
-    }
     /**
      * Undocumented function
-     *@Route("/show", name="app_show")
-     * @return void
+     *@Route("/", name="app_show")
      */
-    public function showw(EntityManagerInterface $entityManager)
+    public function show(EntityManagerInterface $entityManager)
     {
         $repository=$entityManager->getRepository(Devices::class);
         $result=$repository->findAll();
-        return $this->render('question/homepage.html.twig', [$result]);
+        $query =$entityManager->createQueryBuilder();
+        $query
+            ->select('d.device_id', 'd.name', 'c.name', 'd.expiry_date', 'd.status')
+            ->from('Devices', 'd')
+            ->innerJoin('d', 'Companies', 'c', 'd.company_id=c.company_id');
+
+        
+        return $this->render('question/homepage.html.twig', ['Devices' => $result,]);
     }
 }

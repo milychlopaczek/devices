@@ -6,99 +6,29 @@
         <h1 class="display-4">Your Devices List <i class="fa fa-robot"></i></h1>
     </div>
 </div>
+
 <table class="content-table">
   <thead>
     <tr>
-      <th>Rank</th>
+      <th>Device_Id</th>
       <th>Name</th>
-      <th>Points</th>
-      <th>Team</th>
+      <th>Company_Id</th>
+      <th>ExpiryDate</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
+  {% for device in Devices %}
     <tr>
-      <td>1</td>
-      <td>Domenic</td>
-      <td>88,110</td>
-      <td>dcode</td>
+      <td>{{ device.GetDeviceId }}</td>
+      <td>{{ device.GetName }}</td>
+      <td>{{ device.GetCompanyId }}</td>
+      <td>{{ device.GetExpiryDate|date("m/d/Y") }}</td>
+      <td>{{ device.GetStatus }}</td>
     </tr>
-    <tr class="active-row">
-      <td>2</td>
-      <td>Sally</td>
-      <td>72,400</td>
-      <td>Students</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Nick</td>
-      <td>52,300</td>
-      <td>dcode</td>
-    </tr>
+  {% endfor %}
   </tbody>
 </table>
 
-
-<div class="container">
-    <div class="row mb-3">
-        <div class="col">
-            <button class="btn btn-question">Ask a Question</button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 mb-3">
-            <div style="box-shadow: 2px 3px 9px 4px rgba(0,0,0,0.04);">
-                <div class="q-container p-4">
-                    <div class="row">
-                        <div class="col-2 text-center">
-                            <img src="{{ asset('images/tisha.png') }}" width="100" height="100"  alt="Tisha avatar">
-                            <div class="vote-arrows vote-arrows-alt flex-fill pt-2" style="min-width: 90px;">
-                                <span>+ 6 votes</span>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <a class="q-title" href="{{ path('app_question_show', { slug: 'reversing-a-spell' }) }}"><h2>Reversing a Spell</h2></a>
-                            <div class="q-display p-3">
-                                <i class="fa fa-quote-left mr-3"></i>
-                                <p class="d-inline">I've been turned into a cat, any thoughts on how to turn back? While I'm adorable, I don't really care for cat food.</p>
-                                <p class="pt-4"><strong>--Tisha</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a class="answer-link" href="{{ path('app_question_show', { slug: 'reversing-a-spell' }) }}" style="color: #fff;">
-                    <p class="q-display-response text-center p-3">
-                        <i class="fa fa-magic magic-wand"></i> 6 answers
-                    </p>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-12 mb-3">
-            <div class="q-container p-4">
-                <div class="row">
-                    <div class="col-2 text-center">
-                        <img src="{{ asset('images/magic-photo.png') }}" width="100" height="100"  alt="Jerry avatar">
-                        <div class="vote-arrows vote-arrows-alt flex-fill pt-2" style="min-width: 90px;">
-                            <span>- 3 votes</span>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <a class="q-title" href="{{ path('app_question_show', { slug: 'pausing-a-spell' }) }}"><h2>Pausing a Spell</h2></a>
-                        <div class="q-display p-3">
-                            <i class="fa fa-quote-left mr-3"></i>
-                            <p class="d-inline">I mastered the floating card, but now how do I get it back to the ground?</p>
-                            <p class="pt-4"><strong>--Jerry</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="answer-link" href="{{ path('app_question_show', { slug: 'pausing-a-spell' }) }}" style="color: #fff;">
-                <p class="q-display-response text-center p-3">
-                    <i class="fa fa-magic magic-wand"></i> 15 answers
-                </p>
-            </a>
-        </div>
-    </div>
-</div>
 {% endblock %}
 
