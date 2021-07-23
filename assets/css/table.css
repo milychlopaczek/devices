@@ -1,7 +1,13 @@
 * {
     font-family: sans-serif; /* Change your font family */
   }
-  
+  #red{
+    color: #8B0000;
+  }
+  #green
+  {
+    color: #006400;
+  }
   .content-table {
     border-collapse: collapse;
     margin: 25px 0;

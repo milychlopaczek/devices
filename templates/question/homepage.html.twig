@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
 <div class="jumbotron-img jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">Your Devices List <i class="fa fa-robot"></i></h1>
     </div>
 </div>
-
 <table class="content-table table-sortable">
   <thead>
     <tr>
@@ -23,8 +23,18 @@
       <td>{{ device.GetDeviceId }}</td>
       <td contenteditable>{{ device.GetName }}</td>
       <td contenteditable>{{ device.GetCompanyName }}</td>
-      <td contenteditable>{{ device.GetExpiryDate|date("m/d/Y") }}</td>
-      <td>{{ device.GetStatus }}</td>
+      {% if  device.GetExpiryDate|date("d/m/Y") >= "now"|date("d/m/Y") %}
+      <td style="color: #006400;" contenteditable>{{ device.GetExpiryDate|date("d/m/Y") }}</td>
+      {% else %}
+      <td style="color:#8B0000;" contenteditable>{{ device.GetExpiryDate|date("d/m/Y") }}</td>
+      {% endif %}
+      {% if device.GetStatus =="available"%}
+      <td style="color:#006400;">{{ device.GetStatus }}</td>
+      {% elseif device.GetStatus =="Available"%}
+      <td style="color:#006400;">{{ device.GetStatus }}</td>
+      {% else %}
+        <td style="color:#8B0000;">{{ device.GetStatus }}</td>
+      {% endif %}
     </tr>
   {% endfor %}
   </tbody>
