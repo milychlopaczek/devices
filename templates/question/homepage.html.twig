@@ -6,6 +6,8 @@
         <h1 class="display-4">Your Devices List <i class="fa fa-robot"></i></h1>
     </div>
 </div>
+
+
 <table class="content-table table-sortable">
   <thead>
     <tr>
@@ -20,14 +22,18 @@
   {% for device in Devices %}
     <tr>
       <td>{{ device.GetDeviceId }}</td>
-      <td>{{ device.GetName }}</td>
-      <td>{{ device.GetCompanyName }}</td>
-      <td>{{ device.GetExpiryDate|date("m/d/Y") }}</td>
+      <td contenteditable>{{ device.GetName }}</td>
+      <td contenteditable>{{ device.GetCompanyName }}</td>
+      <td contenteditable>{{ device.GetExpiryDate|date("m/d/Y") }}</td>
       <td>{{ device.GetStatus }}</td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
-<a href="{{ path('add_device') }}" ><button class="btn btn-dark" type="submit">Add Device</button> </a>
+<a href="{{ path('add_device') }}" ><button class="btn btn-dark" type="submit">Add Device </button> </a>
+<a><button class="btn btn-dark" type="submit">Save Changes</button></a>
+<script>
+src='app';
+</script>
 {% endblock %}
 

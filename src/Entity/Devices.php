@@ -62,12 +62,12 @@ class Devices
         return $this;
     }
 
-    public function getCompanyName(): ?int
+    public function getCompanyName(): ?string
     {
         return $this->companyName;
     }
 
-    public function setCompanyName(?int $companyName): self
+    public function setCompanyName(?string $companyName): self
     {
         $this->companyName = $companyName;
 
