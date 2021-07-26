@@ -18,8 +18,6 @@ class issuesController extends AbstractController{
      */
     public function show(EntityManagerInterface $entityManager, $id)
     {
-        $repository=$entityManager->getRepository(Devices::class);
-        $result=$repository->findAll();
         $query =$entityManager->createQueryBuilder();
         $query
             ->select('u.device_id', 'u.name', 'u.company_name', 'u.expiry_date', 'u.status')
