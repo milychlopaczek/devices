@@ -19,18 +19,26 @@ class DevicesRepository extends ServiceEntityRepository
         parent::__construct($registry, Devices::class);
     }
 
-     /**
-      * @return Devices[] Returns an array of Devices objects
-     */
     public function DeleteRow($id)
     {
         return $this->createQueryBuilder('d')
             ->delete()
-            ->andWhere('d.device_id')
-            ->setMaxResults(10)
+            ->andWhere('d.device_id= :id')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getResult()
         ;
+    }
+    public function UpdateId()
+    {
+        $sql ='SET  @num := 0;
+
+        UPDATE devices SET device_id = @num := (@num+1);
+        
+        ALTER TABLE devices AUTO_INCREMENT =1;';
+        $conn=$this->getEntityManager()->getConnection();
+        $stmt =$conn->prepare($sql);
+        $stmt->executeQuery();
     }
 
     /*

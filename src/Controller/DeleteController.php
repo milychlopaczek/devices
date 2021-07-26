@@ -18,8 +18,9 @@ class DeleteController extends AbstractController{
     public function delete(DevicesRepository $repository, $id)
     {
         $repository->DeleteRow($id);
-        $questions = $repository->findAllOrderedBy();
-        dd($questions);
+        $repository->UpdateId();
+
             return $this->redirectToRoute('app_show');
     }
+
 }
