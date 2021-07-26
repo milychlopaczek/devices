@@ -19,22 +19,19 @@ class DevicesRepository extends ServiceEntityRepository
         parent::__construct($registry, Devices::class);
     }
 
-    // /**
-    //  * @return Devices[] Returns an array of Devices objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Devices[] Returns an array of Devices objects
+     */
+    public function DeleteRow($id)
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
+            ->delete()
+            ->andWhere('d.device_id')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Devices
