@@ -30,11 +30,6 @@ class QuestionController extends AbstractController{
     {
         $repository=$entityManager->getRepository(Devices::class);
         $result=$repository->findAll();
-        $query =$entityManager->createQueryBuilder();
-        $query
-            ->select('u.device_id', 'u.name', 'u.company_name', 'u.expiry_date', 'u.status')
-            ->from('Devices', 'u');
-        //dd($query);
         return $this->render('question/homepage.html.twig', ['Devices' => $result,]);
     }
 }

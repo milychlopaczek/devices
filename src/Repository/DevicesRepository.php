@@ -29,6 +29,11 @@ class DevicesRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    /**
+     * Undocumented function
+     *
+     * @return Device
+     */
     public function UpdateId()
     {
         $sql ='SET  @num := 0;
@@ -39,6 +44,15 @@ class DevicesRepository extends ServiceEntityRepository
         $conn=$this->getEntityManager()->getConnection();
         $stmt =$conn->prepare($sql);
         $stmt->executeQuery();
+    }
+    public function showIssues($id)
+    {
+        return $this->createQueryBuilder('d')
+            ->select()
+            ->andWhere('d.device_id=:id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
     }
 
     /*

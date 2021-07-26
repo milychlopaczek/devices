@@ -20,7 +20,8 @@ class issuesController extends AbstractController{
     public function show(DevicesRepository $repository, $id)
     {
         
-        
-        return $this->render('question/issues.html.twig');
+        $issues=$repository->showIssues($id);
+        //dd($issues);
+        return $this->render('question/issues.html.twig', ['issues'=>$issues]);
     }
 }

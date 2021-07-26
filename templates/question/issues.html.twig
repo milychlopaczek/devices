@@ -3,10 +3,21 @@
 {% block body %}
 <div class="jumbotron-img jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">Issues List <i class="fa fa-robot"></i></h1>
+        <h1 class="display-4">Issues List of {{issues[0].name}} (ID:{{issues[0].getDeviceId}})<i class="fa fa-robot"></i></h1>
     </div>
 </div>
-
+<ul>
+{% if  issues[0].GetExpiryDate|date("d/m/Y") < "now"|date("d/m/Y") %}
+      <li style="color:#8B0000;">Your Usage License Has Expired!</li>
+      {% else %}
+      <li style="color:#006400;">Your Usage License Is Up to Date</li>
+      {% endif %}
+      {% if issues[0].GetStatus =="Available"%}
+      <li style="color:#006400;">That Device Is Ready To Go!</li>
+      {% else %}
+        <li style="color:#8B0000;">Sorry, That Device Is Currently Inaccessible</li>
+      {% endif %}
+</ul>
 
 
 {% endblock %}

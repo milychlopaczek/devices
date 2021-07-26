@@ -30,9 +30,7 @@
       {% else %}
       <td style="color:#8B0000;" contenteditable>{{ device.GetExpiryDate|date("d/m/Y") }}</td>
       {% endif %}
-      {% if device.GetStatus =="available"%}
-      <td style="color:#006400;">{{ device.GetStatus }}</td>
-      {% elseif device.GetStatus =="Available"%}
+      {% if device.GetStatus =="Available"%}
       <td style="color:#006400;">{{ device.GetStatus }}</td>
       {% else %}
         <td style="color:#8B0000;">{{ device.GetStatus }}</td>
