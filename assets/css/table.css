@@ -1,12 +1,5 @@
 * {
-    font-family: sans-serif; /* Change your font family */
-  }
-  #red{
-    color: #8B0000;
-  }
-  #green
-  {
-    color: #006400;
+    font-family: spartan; /* Change your font family */
   }
   .content-table {
     border-collapse: collapse;
@@ -17,7 +10,6 @@
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   }
-  
   .content-table thead tr {
     background-color: #009879;
     color: #ffffff;
