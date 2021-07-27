@@ -7,7 +7,7 @@
         <h1 class="display-4">Your Devices List <i class="fa fa-robot"></i></h1>
     </div>
 </div>
-<table class="content-table table-sortable">
+<table id="example" class="content-table table-sortable">
   <thead>
     <tr>
       <th>Device_Id</th>
@@ -41,10 +41,31 @@
   {% endfor %}
   </tbody>
 </table>
+<footer id="pagination">
+                <ul class="pagination">
+                    <li class="disabled arrow-left"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="active"><a>1</a></li>
+                    <li class="waves-effect"><a>2</a></li>
+                    <li class="waves-effect"><a>3</a></li>
+                    <li class="waves-effect"><a>4</a></li>
+                    <li class="waves-effect"><a>5</a></li>
+                    <li class="waves-effect"><a>6</a></li>
+                    <li class="waves-effect"><a>7</a></li>
+                    <li class="waves-effect"><a>8</a></li>
+                    <li class="waves-effect"><a>9</a></li>
+                    <li class="waves-effect"><a>10</a></li>
+                    <li class="waves-effect arrow-right"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                </ul>
+            </footer>
 <a href="{{ path('add_device') }}" ><button class="btn btn-dark" type="submit">Add Device </button> </a>
 <a><button class="btn btn-dark" type="submit">Save Changes</button></a>
 
 <script>
+//pagination
+
+
+
+//sorting table
 function sortTableByColumn(table, column, asc = true) {
   const dirModifier = asc ? 1 : -1;
   const tBody = table.tBodies[0];

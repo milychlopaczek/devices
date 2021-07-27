@@ -11,7 +11,7 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   }
   .content-table thead tr {
-    background-color: #009879;
+    background-color: #444;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
@@ -31,12 +31,12 @@
   }
   
   .content-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+    border-bottom: 2px solid #444;
   }
   
   .content-table tbody tr.active-row {
     font-weight: bold;
-    color: #009879;
+    color: #444;
   }
   .table-sortable th {
     cursor: pointer;
@@ -59,4 +59,28 @@
   .table-sortable .th-sort-desc {
     background: rgba(0, 0, 0, 0.1);
   }
-  
+  html,body {
+    margin: 0;
+    padding: 0;
+}
+
+
+h2 {
+  margin-top: 0 !important;
+}
+
+#crypto-table {
+    margin-top: 10%;
+}
+
+ul {
+    margin-top: 50px;
+}
+
+.active {
+    background-color: #ffa726 !important;
+}
+
+.bold {
+    font-weight: 600;
+}
