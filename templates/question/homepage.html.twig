@@ -7,7 +7,8 @@
         <h1 class="display-4">Your Devices List <i class="fa fa-robot"></i></h1>
     </div>
 </div>
-<table id="example" class="content-table table-sortable">
+<div class ="container">
+<table id="myTable" class="content-table table table-bordered">
   <thead>
     <tr>
       <th>Device_Id</th>
@@ -17,18 +18,19 @@
       <th>Status</th>
       <th>Device Issues</th>
       <th>Row deletion</th>
+      <th>Row Edition</th>
     </tr>
   </thead>
   <tbody>
   {% for device in Devices %}
     <tr>
       <td>{{ device.GetDeviceId }}</td>
-      <td contenteditable>{{ device.GetName }}</td>
-      <td contenteditable>{{ device.GetCompanyName }}</td>
+      <td >{{ device.GetName }}</td>
+      <td >{{ device.GetCompanyName }}</td>
       {% if  device.GetExpiryDate|date("d/m/Y") >= "now"|date("d/m/Y") %}
-      <td style="color: #006400;" contenteditable>{{ device.GetExpiryDate|date("d/m/Y") }}</td>
+      <td style="color: #006400;" >{{ device.GetExpiryDate|date("d/m/Y") }}</td>
       {% else %}
-      <td style="color:#8B0000;" contenteditable>{{ device.GetExpiryDate|date("d/m/Y") }}</td>
+      <td style="color:#8B0000;" >{{ device.GetExpiryDate|date("d/m/Y") }}</td>
       {% endif %}
       {% if device.GetStatus =="Available"%}
       <td style="color:#006400;">{{ device.GetStatus }}</td>
@@ -37,76 +39,18 @@
       {% endif %}
       <td><a href="{{ path('device_issues', {id:device.GetDeviceId}) }}"><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i></a></td>
       <td><a href={{path('row_deletion', {id:device.GetDeviceId})}}>Delete this row</a></td>
+      <td><a href={{path('row_edition', {id:device.GetDeviceId})}}>Edit this row</a></td>
     </tr>
   {% endfor %}
   </tbody>
 </table>
-<footer id="pagination">
-                <ul class="pagination">
-                    <li class="disabled arrow-left"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                    <li class="active"><a>1</a></li>
-                    <li class="waves-effect"><a>2</a></li>
-                    <li class="waves-effect"><a>3</a></li>
-                    <li class="waves-effect"><a>4</a></li>
-                    <li class="waves-effect"><a>5</a></li>
-                    <li class="waves-effect"><a>6</a></li>
-                    <li class="waves-effect"><a>7</a></li>
-                    <li class="waves-effect"><a>8</a></li>
-                    <li class="waves-effect"><a>9</a></li>
-                    <li class="waves-effect"><a>10</a></li>
-                    <li class="waves-effect arrow-right"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
-            </footer>
 <a href="{{ path('add_device') }}" ><button class="btn btn-dark" type="submit">Add Device </button> </a>
-<a><button class="btn btn-dark" type="submit">Save Changes</button></a>
+</div>
 
 <script>
-//pagination
-
-
-
-//sorting table
-function sortTableByColumn(table, column, asc = true) {
-  const dirModifier = asc ? 1 : -1;
-  const tBody = table.tBodies[0];
-  const rows = Array.from(tBody.querySelectorAll("tr"));
-
-  // Sort each row
-  const sortedRows = rows.sort((a, b) => {
-      let aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-        let bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
-
-        if (!isNaN(parseFloat(aColText)) && !isNaN(parseFloat(bColText))) {
-            aColText = parseFloat(aColText)
-            bColText = parseFloat(bColText)
-        }
-
-      return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
-  });
-
-  // Remove all existing TRs from the table
-  while (tBody.firstChild) {
-      tBody.removeChild(tBody.firstChild);
-  }
-
-  // Re-add the newly sorted rows
-  tBody.append(...sortedRows);
-
-  // Remember how the column is currently sorted
-  table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
-  table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
-  table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
-}
-
-document.querySelectorAll(".table-sortable th").forEach(headerCell => {
-  headerCell.addEventListener("click", () => {
-      const tableElement = headerCell.parentElement.parentElement.parentElement;
-      const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
-      const currentIsAscending = headerCell.classList.contains("th-sort-asc");
-
-      sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
-  });
-});
+$(document).ready(function() {
+    $('#myTable').DataTable();
+} );
 </script>
 {% endblock %}
 

@@ -54,6 +54,23 @@ class DevicesRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function EditRow($id, $name, $companyName, $ExpiryDate, $status)
+    {
+        return $this->createQueryBuilder('d')
+            ->update()
+            ->set('d.name', ':name')
+            ->set('d.companyName', ':CompanyName')
+            ->set('d.expiry_date', ':ExpiryDate')
+            ->set('d.status', ':Status')
+            ->andWhere('d.device_id=:id')
+            ->setParameter('id', $id)
+            ->setParameter('name', $name)
+            ->setParameter('CompanyName', $companyName)
+            ->setParameter('ExpiryDate', $ExpiryDate)
+            ->setParameter('Status', $status)
+            ->getQuery()
+            ->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Devices

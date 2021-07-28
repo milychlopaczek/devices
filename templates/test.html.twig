@@ -1,0 +1,65 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js">
+
+</script>
+</head>
+<body>
+    <div class="container">
+        <hr />
+        <h4> Pagination test</h4>
+        <hr />
+                <table id="myTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Profile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jakub</td>
+                            <td>fake@gmail.com</td>
+                            <td>Developer</td>
+                        </tr>
+                        <tr>
+                            <td>Jakub</td>
+                            <td>fake@gmail.com</td>
+                            <td>Developer</td>
+                        </tr>
+                        <tr>
+                            <td>Jakub</td>
+                            <td>fake@gmail.com</td>
+                            <td>Developer</td>
+                        </tr>
+                        <tr>
+                            <td>Jakub</td>
+                            <td>fake@gmail.com</td>
+                            <td>Developer</td>
+                        </tr>
+                        <tr>
+                            <td>Radek</td>
+                            <td>iuadhaud@gmail.com</td>
+                            <td>Back-end</td>
+                        </tr>
+                        <tr>
+                            <td>Michal</td>
+                            <td>iaa@gmail.com</td>
+                            <td>graphics designer</td>
+                        </tr>
+                    </tbody>
+                </table>
+    </div>
+    <script>
+    $(document).ready(function() {
+    $('#myTable').DataTable();
+} );
+    </script>
+</body>
+</html>
