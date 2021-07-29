@@ -18,16 +18,22 @@ class DevicesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Devices::class);
     }
-
+    public function delete_prepare()
+    {
+        $sql ="ALTER TABLE `device_users`
+        ADD CONSTRAINT `device_users_ibfk_3`
+        FOREIGN KEY (`device_id`) REFERENCES `devices` (`device_id`)
+        ON DELETE CASCADE;";
+        $conn=$this->getEntityManager()->getConnection();
+        $stmt =$conn->prepare($sql);
+        $stmt->executeQuery();
+    }
     public function DeleteRow($id)
     {
-        return $this->createQueryBuilder('d')
-            ->delete()
-            ->andWhere('d.device_id= :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getResult()
-        ;
+        $sql ="DELETE FROM devices WHERE device_id=$id;";
+        $conn=$this->getEntityManager()->getConnection();
+        $stmt =$conn->prepare($sql);
+        $stmt->executeQuery();
     }
     /**
      * Undocumented function
@@ -36,11 +42,13 @@ class DevicesRepository extends ServiceEntityRepository
      */
     public function UpdateId()
     {
-        $sql ='SET  @num := 0;
+        $sql ='SET FOREIGN_KEY_CHECKS=0;
+        SET  @num := 0;
 
         UPDATE devices SET device_id = @num := (@num+1);
         
-        ALTER TABLE devices AUTO_INCREMENT =1;';
+        ALTER TABLE devices AUTO_INCREMENT =1;
+        SET FOREIGN_KEY_CHECKS=1;';
         $conn=$this->getEntityManager()->getConnection();
         $stmt =$conn->prepare($sql);
         $stmt->executeQuery();

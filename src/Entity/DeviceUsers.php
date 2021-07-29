@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Entity;
+//@ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="user_id", cascade={"persist"})
+//* @ORM\JoinColumn(name="user_id", referencedColumnName="icustomer_id", onDelete="CASCADE")
 
 use App\Repository\DeviceUsersRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=DeviceUsersRepository::class)
+ * @ORM\Table(name="device_users")
  */
 class DeviceUsers
 {
@@ -19,6 +22,7 @@ class DeviceUsers
 
     /**
      * @ORM\Column(type="integer")
+     * 
      */
     private $user_id;
 
@@ -65,7 +69,7 @@ class DeviceUsers
 
     public function getUsersId(): ?int
     {
-        return $this->device_users_id;
+        return $this->user_id;
     }
 
     public function setUsersId(int $users_id): self
@@ -89,7 +93,7 @@ class DeviceUsers
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->end_date;
     }
 
     public function setEndDate(?\DateTimeInterface $end_date): self

@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Devices;
 use App\Repository\DevicesRepository;
 use App\Repository\CompaniesRepository;
+use App\Repository\UsersRepository;
 
 class RowController extends AbstractController{
 
@@ -18,7 +19,7 @@ class RowController extends AbstractController{
     public function delete(DevicesRepository $repository, $id)
     {
         $repository->DeleteRow($id);
-        $repository->UpdateId();
+        //$repository->UpdateId();
 
             return $this->redirectToRoute('app_show');
     }
@@ -26,10 +27,11 @@ class RowController extends AbstractController{
      * Undocumented function
      *@Route("/edit/{id}", name="row_edition")
      */
-    public function edit($id)
+    public function edit($id, DevicesRepository $repository)
     {
 
-            return $this->render('question/edition.html.twig', ['id'=>$id]);
+        $result=$repository->findOneBy(array('device_id'=>$id));
+        return $this->render('question/edition.html.twig', ['id'=>$id, 'name'=>$result->getName(), 'CompanyName'=>$result->getCompanyName(), 'ExpiryDate'=>$result->getExpiryDate()->format('Y-m-d') , 'Status'=>$result->getStatus()]);
     }
     /**
      * Undocumented function
@@ -48,5 +50,40 @@ class RowController extends AbstractController{
 
             return $this->redirectToRoute('app_show');
     }
+    /**
+     * Undocumented function
+     *@Route("/user_deletion/{id}", name="user_deletion")
+     */
+    public function user_delete(UsersRepository $repository, $id)
+    {
+        $repository->delete_cascade($id);
+        //$repository->UpdateId();
 
+            return $this->redirectToRoute('user_show');
+    }
+    /**
+     * Undocumented function
+     *@Route("/user_edit/{id}", name="user_edition")
+     */
+    public function user_edit($id, UsersRepository $repository)
+    {   
+                $result=$repository->findOneBy(array('user_id'=>$id));
+            return $this->render('question/user_edition.html.twig', ['id'=>$id, 'name'=>$result->getName(), 'lastname'=>$result->getLastName(), 'position'=>$result->getPosition()]);
+    }
+    /**
+     * Undocumented function
+     *@Route("/user_update/{id}", name="user_update")
+     */
+    public function user_update(UsersRepository $repository, $id)
+    {
+        if($_SERVER['REQUEST_METHOD']=='POST')
+        {
+            $user_name= $_POST["name"];
+            $last_name= $_POST["LastName"];
+            $Position= $_POST["Status"];
+        }
+            $repository->EditRow($id, $user_name, $last_name, $Position);
+
+            return $this->redirectToRoute('user_show');
+    }
 }

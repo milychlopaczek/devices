@@ -9,15 +9,15 @@
             <form autocomplete="off" action={{path('row_update', {id:id}) }} method="POST">
                 <div>
                     <label for="Name" class="control-label">Device Name</label>
-                    <input type="text" name="name" id="pet-name" class="form-control" />
+                    <input type="text" name="name" id="pet-name" class="form-control" value="{{name}}"/>
                 </div>
                 <div class=>
                     <label for="CompanyName" class="control-label">Company Name</label>
-                    <input type="text" name="CompanyName" id="CompanyName" class="form-control" />
+                    <input type="text" name="CompanyName" id="CompanyName" class="form-control" value="{{CompanyName}}"/>
                 </div>
                 <div>
                     <label for="expiryDate" class="control-label">Expiry Date</label>
-                    <input type="date" name="expiryDate" id="expiryDate" class="form-control" />
+                    <input type="date" name="expiryDate" id="expiryDate" class="form-control" value="{{ExpiryDate}}" />
                 </div>
                 <div>
                     <label for="Status" class="control-label">Status</label>

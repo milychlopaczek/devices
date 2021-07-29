@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="jumbotron-img jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Users List <i class="fas fa-user-circle"></i></h1>
+    </div>
+</div>
+
+<div class ="container">
+  <table id="myUsers" class="content-table table table-bordered">
+    <thead>
+      <tr>
+        <th>User_Id</th>
+        <th>Name</th>
+        <th>LastName</th>
+        <th>Position</th>
+        <th>User deletion</th>
+        <th>Row Edition</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for user in Users %}
+      <tr>
+        <td>{{ user.GetUserId }}</td>
+        <td >{{ user.GetName }}</td>
+        <td >{{ user.GetLastName }}</td>
+        <td >{{ user.GetPosition }}</td>
+        <td><a href={{path('user_deletion', {id:user.GetUserId})}}>Delete this User</a></td>
+        <td><a href={{path('user_edition', {id:user.GetUserId})}}>Edit this User</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <a href="{{ path('add_user') }}" ><button class="btn btn-dark" type="submit">Add User </button> </a>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#myUsers').DataTable();
+} );
+</script>
+{% endblock %}
+

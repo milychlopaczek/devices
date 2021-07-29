@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="jumbotron-img jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Edit User Here<i class="fas fa-user-circle"></i></h1>
+    </div>
+</div>
+            <form autocomplete="off" action={{path('user_update', {id:id })}} method="POST">
+                <div>
+                    <label for="Name" class="control-label">User Name</label>
+                    <input type="text" name="name" id="pet-name" class="form-control" value="{{name}}" />
+                </div>
+                <div class=>
+                    <label for="LastName" class="control-label">Last Name</label>
+                    <input type="text" name="LastName" id="LastName" class="form-control" value="{{lastname}}" />
+                </div>
+                <div>
+                    <label for="Status" class="control-label">Position</label>
+                    <select name="Status" id="form-control"/ class="form-control" >
+                    <option name="użytkownik">Użytkownik</option>
+                    <option name="opiekun">Opiekun</option>
+                    </select>
+                </div>
+                </br>
+                <button type="submit" class="btn btn-dark">Confirm Edition</button>
+            </form>
+{% endblock %}
+

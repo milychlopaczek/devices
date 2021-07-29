@@ -8,44 +8,45 @@
     </div>
 </div>
 <div class ="container">
-<table id="myTable" class="content-table table table-bordered">
-  <thead>
-    <tr>
-      <th>Device_Id</th>
-      <th>Name</th>
-      <th>CompanyName</th>
-      <th>ExpiryDate</th>
-      <th>Status</th>
-      <th>Device Issues</th>
-      <th>Row deletion</th>
-      <th>Row Edition</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for device in Devices %}
-    <tr>
-      <td>{{ device.GetDeviceId }}</td>
-      <td >{{ device.GetName }}</td>
-      <td >{{ device.GetCompanyName }}</td>
-      {% if  device.GetExpiryDate|date("d/m/Y") >= "now"|date("d/m/Y") %}
-      <td style="color: #006400;" >{{ device.GetExpiryDate|date("d/m/Y") }}</td>
-      {% else %}
-      <td style="color:#8B0000;" >{{ device.GetExpiryDate|date("d/m/Y") }}</td>
-      {% endif %}
-      {% if device.GetStatus =="Available"%}
-      <td style="color:#006400;">{{ device.GetStatus }}</td>
-      {% else %}
-        <td style="color:#8B0000;">{{ device.GetStatus }}</td>
-      {% endif %}
-      <td><a href="{{ path('device_issues', {id:device.GetDeviceId}) }}"><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i></a></td>
-      <td><a href={{path('row_deletion', {id:device.GetDeviceId})}}>Delete this row</a></td>
-      <td><a href={{path('row_edition', {id:device.GetDeviceId})}}>Edit this row</a></td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
-<a href="{{ path('add_device') }}" ><button class="btn btn-dark" type="submit">Add Device </button> </a>
+  <table id="myTable" class="content-table table table-bordered">
+    <thead>
+      <tr>
+        <th>Device_Id</th>
+        <th>Name</th>
+        <th>CompanyName</th>
+        <th>ExpiryDate</th>
+        <th>Status</th>
+        <th>Device Issues</th>
+        <th>Device deletion</th>
+        <th>Device Edition</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for device in Devices %}
+      <tr>
+        <td>{{ device.GetDeviceId }}</td>
+        <td >{{ device.GetName }}</td>
+        <td >{{ device.GetCompanyName }}</td>
+        {% if  device.GetExpiryDate|date("d/m/Y") >= "now"|date("d/m/Y") %}
+        <td style="color: #006400;" >{{ device.GetExpiryDate|date("d/m/Y") }}</td>
+        {% else %}
+        <td style="color:#8B0000;" >{{ device.GetExpiryDate|date("d/m/Y") }}</td>
+        {% endif %}
+        {% if device.GetStatus =="Available"%}
+        <td style="color:#006400;">{{ device.GetStatus }}</td>
+        {% else %}
+          <td style="color:#8B0000;">{{ device.GetStatus }}</td>
+        {% endif %}
+        <td><a href="{{ path('device_issues', {id:device.GetDeviceId}) }}"><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i></a></td>
+        <td><a href={{path('row_deletion', {id:device.GetDeviceId})}}>Delete this Device</a></td>
+        <td><a href={{path('row_edition', {id:device.GetDeviceId})}}>Edit this Device</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <a href="{{ path('add_device') }}" ><button class="btn btn-dark" type="submit">Add Device </button> </a>
 </div>
+
 
 <script>
 $(document).ready(function() {
