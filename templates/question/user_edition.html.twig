@@ -6,7 +6,7 @@
         <h1 class="display-4">Edit User Here<i class="fas fa-user-circle"></i></h1>
     </div>
 </div>
-            <form autocomplete="off" action={{path('user_update', {id:id })}} method="POST">
+            <form autocomplete="off" action={{path('user_edition', {id:id })}} method="POST">
                 <div>
                     <label for="Name" class="control-label">User Name</label>
                     <input type="text" name="name" id="pet-name" class="form-control" value="{{name}}" />

@@ -16,6 +16,7 @@ class Users
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer", name="user_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\DeviceUsers", mappedBy="users")
      */
     private $user_id;
 

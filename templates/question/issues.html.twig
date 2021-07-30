@@ -3,22 +3,51 @@
 {% block body %}
 <div class="jumbotron-img jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">Issues List of {{issues[0].name}} (ID:{{issues[0].getDeviceId}})<i class="fa fa-robot"></i></h1>
+        <h1 class="display-4">Specs and Issues List of {{issues[0].name}} (ID:{{issues[0].getDeviceId}})<i class="fa fa-robot"></i></h1>
     </div>
 </div>
-
-<div>
-{% if  issues[0].GetExpiryDate|date("d/m/Y") < "now"|date("d/m/Y") %}
-      <h2 style="color:#8B0000;"> - Your Usage License Has Expired!</h2>
-      {% else %}
-      <h2 style="color:#006400;"> - Your Usage License Is Up to Date</h2>
-      {% endif %}
-      {% if issues[0].GetStatus =="Available"%}
-      <h2 style="color:#006400;"> - That Device Is Ready To Go!</h2>
-      {% else %}
-        <h2 style="color:#8B0000;"> - Sorry, That Device Is Currently Inaccessible</h2>
-      {% endif %}
+<h3>
+<div class="container">
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>License</th>
+        <th>Availiability</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% if  issues[0].GetExpiryDate|date("d/m/Y") < "now"|date("d/m/Y") %}
+              <td style="color:#8B0000;"> Your Usage License Has Expired!</td>
+              {% else %}
+              <td style="color:#006400;"> Your Usage License Is Up to Date</td>
+              {% endif %}
+              {% if issues[0].GetStatus =="Available"%}
+              <td style="color:#006400;"> That Device Is Ready To Go!</td>
+              {% else %}
+              <td style="color:#8B0000;"> Sorry, That Device Is Currently Inaccessible</td>
+              {% endif %}
+    </tbody>
+  </table>
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>User Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for specs in specs %}
+        <tr>
+        <td>{{ specs['name'] }}</td>
+        <td>{{ specs['start_date'] }}</td>
+        <td>{{ specs['end_date'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  <a href={{ path('add_user_device', {id:issues[0].GetDeviceId}) }} ><button class="btn btn-dark" type="submit">Add Device-User Lend Info</button> </a>
 </div>
-
+</h3>
 {% endblock %}
 

@@ -7,13 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=DevicesRepository::class)
+ * @ORM\Table(name="devices")
  */
 class Devices
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="device_id")
+     * @ORM\OneToMany(targetEntity="DeviceUsers", mappedBy="devices")
      */
     private $device_id;
 

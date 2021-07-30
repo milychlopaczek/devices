@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 //@ORM\ManyToOne(targetEntity="App\Entity\Users", inversedBy="user_id", cascade={"persist"})
-//* @ORM\JoinColumn(name="user_id", referencedColumnName="icustomer_id", onDelete="CASCADE")
 
 use App\Repository\DeviceUsersRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,12 +21,15 @@ class DeviceUsers
 
     /**
      * @ORM\Column(type="integer")
-     * 
+     * @ORM\ManyToOne(targetEntity="Users", inversedBy="user_id")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user_id;
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Devices", inversedBy="device_id")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $device_id;
 

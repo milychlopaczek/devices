@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Devices;
+use App\Entity\DeviceUsers;
 use App\Entity\Users;
+use App\Repository\DevicesRepository;
+use App\Repository\DeviceUsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -69,8 +72,40 @@ class formController extends AbstractController
         $row->setName($user_name)
             ->setLastName($last_name)
             ->setPosition($Position);
+
         $entityManager->persist($row);
         $entityManager->flush();
         return $this->redirectToRoute('user_show');
+    }
+    /**
+     * Undocumented function
+     *@Route("/DeviceUserForm/{id}", name="add_user_device")
+     */
+    public function device_user_add($id)
+    {
+        return $this->render('/question/user_device_form.html.twig', ['id'=>$id]);
+    }
+    /**
+     * Undocumented function
+     *@Route("/UserInsert/{id}", name="device_user_insert")
+     * @return void
+     */
+    public function device_user_insert(DeviceUsersRepository $repository, $id)
+    {
+        if($_SERVER['REQUEST_METHOD']=='POST')
+        {
+            $user_id= $_POST["userId"];
+            //dd($user_id);
+            $device_id=$id;
+            $start_date= $_POST["startDate"];
+            $end_date= $_POST["startDate"];
+            $start_date="'".$start_date."'";
+            $end_date="'".$end_date."'";
+            //$startdate = \DateTime::createFromFormat('Y-m-d', $start_date);
+            //$enddate = \DateTime::createFromFormat('Y-m-d', $end_date);
+            $repository->insertdata($device_id, $user_id, $end_date, $start_date);
+        }
+        //dd($ExpiryDatestring);
+        return $this->redirectToRoute('device_issues', array('id'=>$id));
     }
 }

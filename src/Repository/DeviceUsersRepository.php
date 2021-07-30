@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\DeviceUsers;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Stmt;
 
 /**
  * @method DeviceUsers|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,8 +19,13 @@ class DeviceUsersRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, DeviceUsers::class);
     }
-
-
+    public function insertdata($device_id, $user_id, $enddate, $startdate)
+    {
+        $sql ="INSERT INTO device_users (user_id, device_id, start_date, end_date) VALUES ($user_id, $device_id, $startdate, $enddate);";
+        $conn=$this->getEntityManager()->getConnection();
+        $stmt =$conn->prepare($sql);
+        $stmt->executeQuery();
+    }
     /*
     public function findOneBySomeField($value): ?Devices
     {

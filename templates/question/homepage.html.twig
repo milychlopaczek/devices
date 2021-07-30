@@ -16,7 +16,7 @@
         <th>CompanyName</th>
         <th>ExpiryDate</th>
         <th>Status</th>
-        <th>Device Issues</th>
+        <th>Device Specification</th>
         <th>Device deletion</th>
         <th>Device Edition</th>
       </tr>
@@ -37,7 +37,7 @@
         {% else %}
           <td style="color:#8B0000;">{{ device.GetStatus }}</td>
         {% endif %}
-        <td><a href="{{ path('device_issues', {id:device.GetDeviceId}) }}"><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i></a></td>
+        <td><a href="{{ path('device_issues', {id:device.GetDeviceId}) }}"><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i><i class="fas fa-angle-double-right"></i></a></td>
         <td><a href={{path('row_deletion', {id:device.GetDeviceId})}}>Delete this Device</a></td>
         <td><a href={{path('row_edition', {id:device.GetDeviceId})}}>Edit this Device</a></td>
       </tr>

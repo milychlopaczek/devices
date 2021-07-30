@@ -79,7 +79,42 @@ class DevicesRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function device_users($id)
+    {
+        /*return $this->createQueryBuilder('du')
+            ->andWhere('du.device_id=:id')
+            ->innerJoin('du.user_id', 'u')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->execute();*/
+            $sql="SELECT device_users.device_users_id, devices.device_id, users.user_id, devices.name, users.name, device_users.start_date, device_users.end_date
+            FROM ((devices
+            INNER JOIN device_users ON device_users.device_id = devices.device_id)
+            INNER JOIN users ON users.user_id = device_users.user_id)
+            WHERE devices.device_id=$id
+            ORDER BY device_users.start_date;";
+            $conn=$this->getEntityManager()->getConnection();
+            $stmt =$conn->prepare($sql);
+            //dd($stmt);
+            return $stmt->executeQuery();
 
+
+    }
+    public function showall()
+    {
+        /*return $this->createQueryBuilder('du')
+            ->andWhere('du.device_id=:id')
+            ->innerJoin('du.user_id', 'u')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->execute();*/
+            $sql="SELECT * FROM devices;";
+            $conn=$this->getEntityManager()->getConnection();
+            $stmt =$conn->prepare($sql);
+            //dd($stmt);
+            return $stmt->executeQuery();
+
+    }
     /*
     public function findOneBySomeField($value): ?Devices
     {

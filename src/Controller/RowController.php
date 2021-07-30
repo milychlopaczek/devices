@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Users;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,8 @@ use App\Repository\UsersRepository;
 class RowController extends AbstractController{
 
     /**
-     * Undocumented function
+     * Usuwanie użytkownika.
+     *
      *@Route("/deletion/{id}", name="row_deletion")
      */
     public function delete(DevicesRepository $repository, $id)
@@ -29,7 +31,6 @@ class RowController extends AbstractController{
      */
     public function edit($id, DevicesRepository $repository)
     {
-
         $result=$repository->findOneBy(array('device_id'=>$id));
         return $this->render('question/edition.html.twig', ['id'=>$id, 'name'=>$result->getName(), 'CompanyName'=>$result->getCompanyName(), 'ExpiryDate'=>$result->getExpiryDate()->format('Y-m-d') , 'Status'=>$result->getStatus()]);
     }
@@ -65,8 +66,29 @@ class RowController extends AbstractController{
      * Undocumented function
      *@Route("/user_edit/{id}", name="user_edition")
      */
-    public function user_edit($id, UsersRepository $repository)
-    {   
+    public function user_edit($id, UsersRepository $repository, EntityManagerInterface $entityManager)
+    {
+        if ($_SERVER['REQUEST_METHOD']=='POST') {
+
+
+            $user_name= $_POST["name"];
+            $last_name= $_POST["LastName"];
+            $Position= $_POST["Status"];
+
+            /** @var Users $user */
+            $user = $repository->findOneBy(['user_id'=>$id]);
+
+            $user->setName($user_name)
+                ->setLastName($last_name)
+                ->setPosition($Position);
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            dump('dodano'); die();
+            //update usera i redirect do listy userów
+        }
+
                 $result=$repository->findOneBy(array('user_id'=>$id));
             return $this->render('question/user_edition.html.twig', ['id'=>$id, 'name'=>$result->getName(), 'lastname'=>$result->getLastName(), 'position'=>$result->getPosition()]);
     }
@@ -83,6 +105,7 @@ class RowController extends AbstractController{
             $Position= $_POST["Status"];
         }
             $repository->EditRow($id, $user_name, $last_name, $Position);
+
 
             return $this->redirectToRoute('user_show');
     }

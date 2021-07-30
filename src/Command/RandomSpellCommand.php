@@ -24,6 +24,8 @@ class RandomSpellCommand extends Command
 
     protected function configure()
     {
+
+
         $this
             ->setDescription('Cast a random spell!')
             ->addArgument('your-name', InputArgument::OPTIONAL, 'Your name')
